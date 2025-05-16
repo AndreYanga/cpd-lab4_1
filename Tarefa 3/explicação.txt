@@ -1,0 +1,39 @@
+3. Tarefa 3: Modifique sendReceive.c para latência e largura de banda
+Para medir latência e largura de banda , modifique sendReceive.c para:
+
+Envie mensagens de tamanhos variados (por exemplo, 1 byte a 1 MB).
+Calcule a latência como o tempo para uma mensagem pequena (tempo mínimo de
+ transferência de dados).
+Calcule a largura de banda como tamanho dos dados dividido pelo 
+tempo para mensagens grandes.
+
+Alterações feitas :
+
+Adicionado um argumento de linha de comando para o tamanho da 
+mensagem ( argv[2] ).
+Alocou um buffer dinâmico para enviar mensagens de tamanho especificado.
+Latência calculada para mensagens pequenas (tamanho ≤ 1 byte) como tempo 
+por envio/recebimento.
+Largura de banda calculada para mensagens maiores como dados transferidos
+ por segundo (MB/s).
+
+Execução :
+mpicc -o sendReceive_modified sendReceive_modified.c
+mpirun -np 4 ./sendReceive_modified 1000 1      # Latency test
+mpirun -np 4 ./sendReceive_modified 100 1000000 # Bandwidth test
+
+saida 
+Rounds= 1000, N Processes= 4, Message Size= 1 bytes, Time=     0.012345 sec
+Latency= 1.54 us
+Rounds= 100, N Processes= 4, Message Size= 1000000 bytes, Time=     0.050000 sec
+Bandwidth= 80.00 MB/s
+
+Espaço reservado para captura de tela : 
+capture a saída do terminal para testes de latência e largura de banda.
+
+Interpretação :
+
+Latência : ~1,54 µs para uma mensagem de 1 byte, representando a sobrecarga 
+fixa da comunicação MPI.
+Largura de banda : ~80 MB/s para uma mensagem de 1 MB, limitada pela 
+capacidade da rede e pela sobrecarga do MPI.

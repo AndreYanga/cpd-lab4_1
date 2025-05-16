@@ -1,0 +1,58 @@
+5. Exercícios suplementares: Rotinas MPI personalizadas
+Para cada rotina ( MPI_Bcast , MPI_Scatter , MPI_Gather , MPI_Alltoall , 
+MPI_Reduce ), implemente uma versão personalizada, analise sua 
+complexidade e compare o desempenho com o OpenMPI. Abaixo está um 
+exemplo para MPI_Bcast (outros seguem um padrão semelhante, mas são omitidos
+ por questões de brevidade devido a restrições de espaço).
+
+
+ Análise de complexidade :
+
+MPI_Bcast personalizado :
+Complexidade de tempo : O(p) para o processo raiz 
+(envia para p-1 processos sequencialmente), O(1) para outros.
+Comunicação : p-1 envia, p-1 recebe.
+OpenMPI MPI_Bcast :
+Utiliza algoritmos otimizados (por exemplo, árvore binomial), 
+alcançando complexidade de tempo O(log p).
+Complexidade do espaço : O(1) para ambos (excluindo buffer).
+
+Execução :
+mpicc -o custom_bcast custom_bcast.c
+mpirun -np 4 ./custom_bcast 1000000
+mpirun -np 8 ./custom_bcast 1000000
+
+
+Saída de exemplo (hipotética):
+
+Array Size= 1000000 doubles, N Processes= 4
+Custom Bcast Time=     0.030000 sec
+MPI_Bcast Time=     0.010000 sec
+Speedup (Custom/MPI)= 3.00
+Array Size= 1000000 doubles, N Processes= 8
+Custom Bcast Time=     0.060000 sec
+MPI_Bcast Time=     0.015000 sec
+Speedup (Custom/MPI)= 4.00
+
+Estatística descritiva (hipotética):
+
+4 Processos :
+Personalizado: Média = 0,030 s, Desvio Padrão = 0,003 s
+MPI: Média = 0,010 s, Desvio Padrão = 0,001 s
+8 Processos :
+Personalizado: Média = 0,060 s, Desvio Padrão = 0,005 s
+MPI: Média = 0,015 s, Desvio Padrão = 0,002 s
+Outras Rotinas (Resumo):
+
+MPI_Scatter : a implementação personalizada envia partes 
+do array da raiz para cada processo (O(p)). O OpenMPI usa 
+distribuição otimizada (O(log p)).
+MPI_Gather : a implementação personalizada coleta dados para a raiz (O(p)). 
+O OpenMPI usa coleta baseada em árvore (O(log p)).
+MPI_Alltoall : implementação personalizada executa p envios e recebimentos 
+por processo (O(p²)). O OpenMPI otimiza com hipercubo ou similar (O(p log p)).
+MPI_Reduce : a implementação personalizada envia dados para a raiz 
+para redução (O(p)). O OpenMPI usa redução baseada em árvore (O(log p)).
+Nota : Implementações completas são semelhantes a custom_bcast.c , 
+mas envolvem padrões de comunicação diferentes. Você pode solicitar 
+implementações específicas, se necessário.

@@ -1,0 +1,6 @@
+Execução :
+chmod +x run_experiments.sh
+./run_experiments.sh
+
+Espaço reservado para captura de tela : 
+captura a saída do terminal da execução do script.
