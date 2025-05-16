@@ -3,8 +3,7 @@
 	Copyright: 2021-22
 	Author: Prof. Joao Costa
 	Date: 13/05/22 10:28
-	Description: 
-	Simple experience to understand the Message Passing Interface.
+	.
 */
 
 #include <stdio.h>

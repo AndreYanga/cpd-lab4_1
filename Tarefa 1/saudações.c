@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <mpi.h>
+#include <unistd.h> // <- Adicionado para gethostname
 
 int main(int argc, char *argv[]) {
     int id, p;
@@ -17,14 +18,9 @@ int main(int argc, char *argv[]) {
 }
 
 
+
 /*
-mpicc -o greetings greetings.c
-mpirun -np 4 ./greetings
+mpicc -o saudações saudações.c
+mpirun -np 4 ./saudações
 
-saida 
-
-Process 0 sends greetings from machine node1!
-Process 1 sends greetings from machine node1!
-Process 2 sends greetings from machine node2!
-Process 3 sends greetings from machine node2!
 */

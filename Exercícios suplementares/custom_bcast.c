@@ -2,12 +2,13 @@
     Name: Custom MPI_Bcast Implementation
     Author: Student
     Date: 16/05/25
-    Description: Custom MPI_Bcast using point-to-point communication.
+    
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <mpi.h>
+
 
 void custom_bcast(void *buffer, int count, MPI_Datatype datatype, int root, MPI_Comm comm) {
     int id, p, i;
